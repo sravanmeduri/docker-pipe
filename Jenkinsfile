@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         registry = "sravanmeduri/light"
-        registryCredential = "319627b8-733e-43eb-8882-c3e74713625c"
+        registryCredential = "7bb40825-46be-4153-b611-0fa92be57638"
         dockerImage = ""
     } 
     stages {
