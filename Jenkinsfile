@@ -27,5 +27,10 @@ pipeline {
                 }
             }
         }
+        stage('Pushing to another branch') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/test']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sravanmeduri/docker-pipe.git']]])
+            }
+        }
     }
 }
