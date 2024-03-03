@@ -11,24 +11,10 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sravanmeduri/docker-pipe.git']]])
             }
         }
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    dockerImage = docker.build registry
-                }
-            }
-        }
-        stage('Pushing to hub') {
-            steps {
-                script {
-                    docker.withRegistry('',registryCredential) {
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
         stage('Pushing to another branch') {
             steps {
+                bat git add -A Dockerfile
+                bat git commit -m "pipeline push"
                 bat git push origin test
             }
         }
