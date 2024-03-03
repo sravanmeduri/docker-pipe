@@ -13,6 +13,8 @@ pipeline {
         }
         stage('Pushing to another branch') {
             steps {
+                bat 'git config --global user.email sravanmeduri97@gmail.com'
+                bat 'git config --global user.name sravanmeduri'
                 bat 'git add -A Dockerfile'
                 bat 'git commit -m "pipeline push"'
                 bat 'git push origin test'
