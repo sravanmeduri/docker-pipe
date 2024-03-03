@@ -13,9 +13,9 @@ pipeline {
         }
         stage('Pushing to another branch') {
             steps {
-                git.exe add -A Dockerfile
-                git.exe commit -m "pipeline push"
-                git.exe push origin test
+                bat 'git add -A Dockerfile'
+                bat 'git commit -m "pipeline push"'
+                bat 'git push origin test'
             }
         }
     }
