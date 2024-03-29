@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata: 
+  name: webstack
+  namespace: argocd
+spec: 
+  generators: 
+    - list: 
+        elements: 
+          - cluster: argo
+            url: https://argo-dns-7cbeacc8.hcp.centralindia.azmk8s.io:443
+          - cluster: demo
+            url: https://demo-dns-299e5058.hcp.eastus.azmk8s.io:443
+  template: 
+    metadata: 
+      name: "{{cluster}}-webstack"
+    spec: 
+      destination: 
+        namespace: webstack
+        server: "{{url}}"
+      project: default
+      source: 
+        path: "dev/{{cluster}}"
+        repoURL: "https://github.com/sravanmeduri/Argoproj.git"
+        targetRevision: main
+      syncPolicy: 
+        automated: 
+          prune: true
+          selfHeal: true
+        syncOptions: 
+          - CreateNamespace=true
+
