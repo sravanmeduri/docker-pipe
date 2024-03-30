@@ -1,6 +1,6 @@
 FROM python:latest
 
-
+COPY test.py /
 COPY main.py /
 
 
